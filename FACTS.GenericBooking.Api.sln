@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".msbuild", ".msbuild", "{C7B36DB9-D073-4DE8-BB36-0C0546907A1C}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{175AEDD8-71F0-4EF4-A380-A2D84D44709D}"
+	ProjectSection(SolutionItems) = preProject
+		DbSchemaDDL.sql = DbSchemaDDL.sql
+		postmanerator.exe = postmanerator.exe
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FACTS.GenericBooking.Api", "FACTS.Booking.Api\FACTS.GenericBooking.Api.csproj", "{C7C256AA-5319-4C6A-BD3A-4BCA1DD2B6FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FACTS.GenericBooking.Domain", "FACTS.Booking.Domain\FACTS.GenericBooking.Domain.csproj", "{5F00B2E7-A54C-422B-8248-056570639972}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FACTS.GenericBooking.Common", "FACTS.Booking.Common\FACTS.GenericBooking.Common.csproj", "{793304B3-D5EF-47C7-BA6F-BDBEC8817D9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FACTS.GenericBooking.Repository.Postgres", "FACTS.Booking.Repository.Postgres\FACTS.GenericBooking.Repository.Postgres.csproj", "{5079DA05-3E41-4FDA-8F8E-6CDF24EDDB58}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FACTS.GenericBooking.Repository.Ingres", "FACTS.Booking.Repository.Ingres\FACTS.GenericBooking.Repository.Ingres.csproj", "{35054CD9-0085-4C51-85C1-50465A76F763}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7C256AA-5319-4C6A-BD3A-4BCA1DD2B6FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7C256AA-5319-4C6A-BD3A-4BCA1DD2B6FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7C256AA-5319-4C6A-BD3A-4BCA1DD2B6FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7C256AA-5319-4C6A-BD3A-4BCA1DD2B6FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F00B2E7-A54C-422B-8248-056570639972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F00B2E7-A54C-422B-8248-056570639972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F00B2E7-A54C-422B-8248-056570639972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F00B2E7-A54C-422B-8248-056570639972}.Release|Any CPU.Build.0 = Release|Any CPU
+		{793304B3-D5EF-47C7-BA6F-BDBEC8817D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793304B3-D5EF-47C7-BA6F-BDBEC8817D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793304B3-D5EF-47C7-BA6F-BDBEC8817D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793304B3-D5EF-47C7-BA6F-BDBEC8817D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5079DA05-3E41-4FDA-8F8E-6CDF24EDDB58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5079DA05-3E41-4FDA-8F8E-6CDF24EDDB58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5079DA05-3E41-4FDA-8F8E-6CDF24EDDB58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5079DA05-3E41-4FDA-8F8E-6CDF24EDDB58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35054CD9-0085-4C51-85C1-50465A76F763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35054CD9-0085-4C51-85C1-50465A76F763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35054CD9-0085-4C51-85C1-50465A76F763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35054CD9-0085-4C51-85C1-50465A76F763}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {451F704D-423B-41A7-B8DB-F8D35A04DD1F}
+	EndGlobalSection
+EndGlobal

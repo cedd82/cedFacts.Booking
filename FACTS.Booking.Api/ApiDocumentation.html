@@ -1,0 +1,1050 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- ReSharper disable Html.TagNotClosed -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FACTS Booking Api</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.configure({
+            tabReplace: '    ',
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <style>
+        body {
+            position: relative;
+        }
+
+        h1 {
+            margin-top: 5px;
+        }
+
+        h1, h2, h3, h4 {
+            color: #2b2b2b;
+        }
+
+            h2:after {
+                content: ' ';
+            }
+
+        h5 {
+            font-weight: bold;
+        }
+
+            h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+                display: none;
+                position: absolute;
+                margin-left: 8px;
+            }
+
+            h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a, h6:hover a {
+                color: #a5a5a5;
+                display: initial;
+            }
+
+        .nav.nav-tabs > li > a {
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+
+        .tab-content {
+            padding-top: 8px;
+        }
+
+        .table {
+            margin-bottom: 8px;
+        }
+
+        pre {
+            border-radius: 0px;
+            border: none;
+        }
+
+            pre code {
+                margin: -9.5px;
+            }
+
+        .request {
+            margin-top: 12px;
+            margin-bottom: 24px;
+        }
+
+        .response-text-sample {
+            padding: 0px !important;
+        }
+
+            .response-text-sample pre {
+                margin-bottom: 0px;
+            }
+
+
+        #sidebar-wrapper {
+            z-index: 1000;
+            position: fixed;
+            left: 250px;
+            width: 250px;
+            height: 100%;
+            margin-left: -250px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: #2b2b2b;
+            padding-top: 20px;
+        }
+
+            #sidebar-wrapper ul {
+                width: 250px;
+            }
+
+                #sidebar-wrapper ul li {
+                    margin-right: 10px;
+                }
+
+                    #sidebar-wrapper ul li a:hover {
+                        background: inherit;
+                        text-decoration: none;
+                    }
+
+                    #sidebar-wrapper ul li a {
+                        display: block;
+                        color: #ECF0F1;
+                        padding: 6px 15px;
+                    }
+
+                    #sidebar-wrapper ul li ul {
+                        padding-left: 25px;
+                    }
+
+                        #sidebar-wrapper ul li ul li a {
+                            padding: 1px 0px;
+                        }
+
+                    #sidebar-wrapper ul li a:hover,
+                    #sidebar-wrapper ul li a:focus {
+                        color: #e0c46c;
+                        border-right: solid 1px #e0c46c;
+                    }
+
+                    #sidebar-wrapper ul li.active > a {
+                        color: #e0c46c;
+                        border-right: solid 3px #e0c46c;
+                    }
+
+                    #sidebar-wrapper ul li:not(.active) ul {
+                        display: none;
+                    }
+
+        #page-content-wrapper {
+            width: 100%;
+            position: absolute;
+            padding: 15px 15px 15px 250px;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".scrollspy">
+    <div id="sidebar-wrapper">
+        <div class="scrollspy">
+            <ul id="main-menu" data-spy="affix" class="nav">
+                <li>
+                    <a href="#doc-general-notes">General notes</a>
+                </li>
+
+                <li>
+                    <a href="#doc-api-detail">API detail</a>
+                </li>
+
+
+
+                <li>
+                    <a href="#folder-vehicle">vehicle</a>
+                    <ul>
+
+                        <li>
+                            <a href="#request-vehicle-vehicle-vehicle-types">/vehicle/vehicle-types</a>
+                        </li>
+
+                        <li>
+                            <a href="#request-vehicle-vehicle-makes">/vehicle/makes</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="#folder-rates">rates</a>
+                    <ul>
+
+                        <li>
+                            <a href="#request-rates-rates-get-rates">/rates/get-rates</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="#folder-auth">auth</a>
+                    <ul>
+
+                        <li>
+                            <a href="#request-auth-auth-login">/auth/login</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>FACTS Booking Api</h1>
+
+                    <h2 id="doc-general-notes">
+                        General notes
+                        <a href="#doc-general-notes"><i class="glyphicon glyphicon-link"></i></a>
+                    </h2>
+
+                    <p>Facts api is a general purpose vehicle transport booking service provided by CEVA Logistics for interstate vehicle transport. Quotes are provided on a vehicle by vehicle basis.</p>
+
+                    <p>Vehicles can be moved with three different services:</p>
+
+                    <ul>
+                        <li>standard - base service to move a vehicle.</li>
+                        <li>express - faster transport than standard.</li>
+                        <li>premiumEnclosed - ideal for high value vehicles, customers who which to provide extra protection for their vehicle during movement. Vehicles are enclosed in a container preventing damage.</li>
+                    </ul>
+
+                    <p>Vehicles can be moved to and from two different location types:</p>
+
+                    <ul>
+                        <li>customer - a customers home address within Australia.</li>
+                        <li>depot - a CEVA logistics depot in an Australian state. Our Depots include:</li>
+                    </ul>
+
+                    <table>
+                        <tr>
+                            <th>Deopt suburb</th>
+                            <th>State</th>
+                            <th>Postcode</th>
+                        </tr>
+                        <tr>
+                            <td>WINGFIELD</td>
+                            <td>SA</td>
+                            <td>5013</td>
+                        </tr>
+                        <tr>
+                            <td>PINKENBA (VL)</td>
+                            <td>QLD</td>
+                            <td>4008</td>
+                        </tr>
+                        <tr>
+                            <td>EAST ARM</td>
+                            <td>NT</td>
+                            <td>0822</td>
+                        </tr>
+                        <tr>
+                            <td>TRUGANINA (VL)</td>
+                            <td>VIC</td>
+                            <td>3030</td>
+                        </tr>
+                        <tr>
+                            <td>HIGH WYCOMBE (VL)</td>
+                            <td>WA</td>
+                            <td>6057</td>
+                        </tr>
+                        <tr>
+                            <td>MINTO (VL)</td>
+                            <td>NSW</td>
+                            <td>2566</td>
+                        </tr>
+                        <tr>
+                            <td>MOUNT ST JOHN</td>
+                            <td>QLD</td>
+                            <td>4818</td>
+                        </tr>
+                    </table>
+
+
+
+
+                    <h2 id="doc-api-detail">
+                        API detail
+                        <a href="#doc-api-detail"><i class="glyphicon glyphicon-link"></i></a>
+                    </h2>
+
+
+
+
+
+
+                    <div class="endpoints-group">
+                        <h3 id="folder-vehicle">
+                            vehicle
+                            <a href="#folder-vehicle"><i class="glyphicon glyphicon-link"></i></a>
+                        </h3>
+
+                        <div></div>
+
+
+
+                        <div class="request">
+
+                            <h4 id="request-vehicle-vehicle-vehicle-types">
+                                /vehicle/vehicle-types
+                                <a href="#request-vehicle-vehicle-vehicle-types"><i class="glyphicon glyphicon-link"></i></a>
+                            </h4>
+
+                            <div>
+                                <p>Sample request:</p>
+
+<pre><code>    GET vehicle-types
+</code></pre>
+
+                                <p>Sample response:</p>
+
+<pre><code>{
+    &quot;data&quot;: [
+    {
+        &quot;make&quot;: &quot;FORD&quot;,
+        &quot;models&quot;: [
+        {
+            &quot;model&quot;: &quot;TAURUS&quot;,
+            &quot;type&quot;: &quot;SEDAN&quot;
+        },
+        {
+            &quot;model&quot;: &quot;LINCOLN&quot;,
+            &quot;type&quot;: &quot;SEDAN&quot;
+        },
+        {
+            &quot;model&quot;: &quot;COUGAR&quot;,
+            &quot;type&quot;: &quot;SEDAN&quot;
+        },
+        {
+            &quot;model&quot;: &quot;FOCUS TITANIUM&quot;,
+            &quot;type&quot;: &quot;SEDAN&quot;
+        }],
+        &quot;status&quot;: {
+            &quot;code&quot;: 200,
+            &quot;name&quot;: &quot;OK&quot;,
+            &quot;timestamp&quot;: &quot;2020-12-30T14:35:20&quot;
+        }
+    ]
+}
+</code></pre>
+                            </div>
+
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#request-vehicle-vehicle-vehicle-types-example-curl" data-toggle="tab">Curl</a></li>
+                                    <li role="presentation"><a href="#request-vehicle-vehicle-vehicle-types-example-http" data-toggle="tab">HTTP</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="request-vehicle-vehicle-vehicle-types-example-curl">
+                                        <pre><code class="hljs curl">curl -X GET "{{baseUrl}}/vehicle/vehicle-types?Make=<string>&Model=<string>&Type=<string>"</code></pre>
+                                    </div>
+                                    <div class="tab-pane" id="request-vehicle-vehicle-vehicle-types-example-http">
+                                        <pre><code class="hljs http">GET %7B%7BbaseUrl%7D%7D/vehicle/vehicle-types?Make=<string>&Model=<string>&Type=<string> HTTP/1.1
+Host: </code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+
+                                    <li role="presentation" class="active">
+                                        <a href="#request-vehicle-vehicle-vehicle-types-responses-578f524a-5a1b-4b12-8f0e-9e5d2a42d333" data-toggle="tab">
+
+                                            Response
+
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+
+                                    <div class="tab-pane active" id="request-vehicle-vehicle-vehicle-types-responses-578f524a-5a1b-4b12-8f0e-9e5d2a42d333">
+                                        <table class="table table-bordered">
+                                            <tr><th style="width: 20%;">Status</th><td>200 OK</td></tr>
+
+                                            <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+
+
+
+                                            <tr>
+                                                <td class="response-text-sample" colspan="2">
+                                                    <pre><code>[
+    {
+        "make": "FORD",
+        "models": [
+            {
+                "model": "TAURUS",
+                "type": "SEDAN"
+            },
+            {
+                "model": "TAURUS",
+                "type": "SEDAN"
+            }
+        ]
+    },
+    {
+        "make": "FORD",
+        "models": [
+            {
+                "model": "TAURUS",
+                "type": "SEDAN"
+            },
+            {
+                "model": "TAURUS",
+                "type": "SEDAN"
+            }
+        ]
+    }
+]</code></pre>
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <hr>
+                        </div>
+
+
+                        <div class="request">
+
+                            <h4 id="request-vehicle-vehicle-makes">
+                                /vehicle/makes
+                                <a href="#request-vehicle-vehicle-makes"><i class="glyphicon glyphicon-link"></i></a>
+                            </h4>
+
+                            <div>
+                                <pre><code>Sample response:
+
+{
+    &quot;data&quot;: [
+        &quot;FORD&quot;,
+        &quot;TOYOTA&quot;,
+        &quot;MAZDA&quot;
+    ],
+    &quot;status&quot;: {
+        &quot;code&quot;: 200,
+        &quot;name&quot;: &quot;OK&quot;,
+        &quot;timestamp&quot;: &quot;2020-12-30T14:35:20&quot;
+    }
+</code></pre>
+
+                                <p>}</p>
+                            </div>
+
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#request-vehicle-vehicle-makes-example-curl" data-toggle="tab">Curl</a></li>
+                                    <li role="presentation"><a href="#request-vehicle-vehicle-makes-example-http" data-toggle="tab">HTTP</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="request-vehicle-vehicle-makes-example-curl">
+                                        <pre><code class="hljs curl">curl -X GET "{{baseUrl}}/vehicle/makes"</code></pre>
+                                    </div>
+                                    <div class="tab-pane" id="request-vehicle-vehicle-makes-example-http">
+                                        <pre><code class="hljs http">GET %7B%7BbaseUrl%7D%7D/vehicle/makes HTTP/1.1
+Host: </code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+
+                                    <li role="presentation" class="active">
+                                        <a href="#request-vehicle-vehicle-makes-responses-883d87e4-dcd2-4140-bae0-08af3097d577" data-toggle="tab">
+
+                                            Response
+
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+
+                                    <div class="tab-pane active" id="request-vehicle-vehicle-makes-responses-883d87e4-dcd2-4140-bae0-08af3097d577">
+                                        <table class="table table-bordered">
+                                            <tr><th style="width: 20%;">Status</th><td>200 OK</td></tr>
+
+                                            <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+
+
+
+                                            <tr>
+                                                <td class="response-text-sample" colspan="2">
+                                                    <pre><code>[
+    "incididunt dolor elit eiusmod pa",
+    "et ut"
+]</code></pre>
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <hr>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="endpoints-group">
+                        <h3 id="folder-rates">
+                            rates
+                            <a href="#folder-rates"><i class="glyphicon glyphicon-link"></i></a>
+                        </h3>
+
+                        <div>
+                            <table>
+                                <tbody>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">Element Name</td>
+                                        <td style="height: 21px;">Description</td>
+                                        <td style="height: 21px;">Optional/Mandatory</td>
+                                        <td style="height: 21px;">Type</td>
+                                        <td style="height: 21px;">Length</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">accountNumber</td>
+                                        <td style="height: 21px;">Indicates a sub account under the login to get the rates</td>
+                                        <td style="height: 21px;">Optional</td>
+                                        <td style="height: 21px;">string</td>
+                                        <td style="height: 21px;">6&nbsp;</td>
+                                    </tr>
+                                    <tr style="height: 61px;">
+                                        <td style="height: 61px;">serviceType</td>
+                                        <td style="height: 61px;" width="382">Can be either standard, express or premiumEnclosed.<br /> If no value is specified then all rates are returned for each service type&nbsp;</td>
+                                        <td style="height: 61px;">Optional</td>
+                                        <td style="height: 61px;">string</td>
+                                        <td style="height: 21px;">15&nbsp;</td>
+                                    </tr>
+                                    <tr style="height: 81px;">
+                                        <td style="height: 81px;">pickupType</td>
+                                        <td style="height: 81px;" width="382">specify the pickup location type. can be either customer or depot. <br /> If no value is returned then rates for both location types are returned</td>
+                                        <td style="height: 81px;">Mandatory</td>
+                                        <td style="height: 81px;">string</td>
+                                        <td style="height: 81px;">8&nbsp;</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">pickupSuburb</td>
+                                        <td style="height: 21px;">Suburb where the vehicle will be picked</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string</td>
+                                        <td style="height: 21px;">20</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">pickupPostcode</td>
+                                        <td style="height: 21px;">Postcode where the vehicle will be picked</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string</td>
+                                        <td style="height: 21px;">4</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">pickupState</td>
+                                        <td style="height: 21px;">State where the vehicle will be picked</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string</td>
+                                        <td style="height: 21px;">3</td>
+                                    </tr>
+                                    <tr style="height: 81px;">
+                                        <td style="height: 81px;">deliveryType</td>
+                                        <td style="height: 81px;">specify the delivery location type. can be either customer or depot. <br /> If no value is returned then rates for both location types are returned&nbsp;</td>
+                                        <td style="height: 81px;">&nbsp;</td>
+                                        <td style="height: 81px;">string&nbsp;</td>
+                                        <td style="height: 81px;">8&nbsp;</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">deliverySuburb</td>
+                                        <td style="height: 21px;">Suburb where the vehicle will be delivered</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string</td>
+                                        <td style="height: 21px;">&nbsp;20</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">deliveryPostcode</td>
+                                        <td style="height: 21px;">Postcode where the vehicle will be delivered</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string&nbsp;</td>
+                                        <td style="height: 21px;">4&nbsp;</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">deliveryState</td>
+                                        <td style="height: 21px;">State where the vehicle will be delivered</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string&nbsp;</td>
+                                        <td style="height: 21px;">3&nbsp;</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">isDriveable</td>
+                                        <td style="height: 21px;">is the vehicle driveable</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">bool&nbsp;</td>
+                                        <td style="height: 21px;">&nbsp;</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">isModified</td>
+                                        <td style="height: 21px;">is the vehicle modified</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">bool&nbsp;</td>
+                                        <td style="height: 21px;">&nbsp;</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">isDamaged</td>
+                                        <td style="height: 21px;">is the vehicle damaged</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">bool&nbsp;</td>
+                                        <td style="height: 21px;">&nbsp;</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">vehicleMake</td>
+                                        <td style="height: 21px;">make of the vehicle e.g. Ford</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string</td>
+                                        <td style="height: 21px;">20</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">vehicleModel</td>
+                                        <td style="height: 21px;">modle of the vehicle e.g. Falcon</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string</td>
+                                        <td style="height: 21px;">20</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">vehicleType</td>
+                                        <td style="height: 21px;">type of vehicle e.g Sedan</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string</td>
+                                        <td style="height: 21px;">20</td>
+                                    </tr>
+                                    <tr style="height: 21px;">
+                                        <td style="height: 21px;">vehicleValue</td>
+                                        <td style="height: 21px;">monetary value of the vehicle</td>
+                                        <td style="height: 21px;">Mandatory</td>
+                                        <td style="height: 21px;">string</td>
+                                        <td style="height: 21px;">7</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                        <div class="request">
+
+                            <h4 id="request-rates-rates-get-rates">
+                                /rates/get-rates
+                                <a href="#request-rates-rates-get-rates"><i class="glyphicon glyphicon-link"></i></a>
+                            </h4>
+
+                            <div>
+                                <p>Sample request:</p>
+
+<pre><code> POST /rates/get-rates
+ {
+     &quot;accountNumber&quot;: &quot;PP9900&quot;,
+     &quot;serviceType&quot;: &quot;standard&quot;,
+     &quot;pickupType&quot;: &quot;customer&quot;,
+     &quot;pickupSuburb&quot;: &quot;MINTO&quot;,
+     &quot;pickupPostcode&quot;: &quot;2566&quot;,
+     &quot;pickupState&quot;: &quot;NSW&quot;,
+     &quot;deliveryType&quot;: &quot;&quot;,
+     &quot;deliverySuburb&quot;: &quot;CAIRNS&quot;,
+     &quot;deliveryPostcode&quot;: &quot;4870&quot;,
+     &quot;deliveryState&quot;: &quot;QLD&quot;,
+     &quot;isDriveable&quot;: true,
+     &quot;isModified&quot;: false,
+     &quot;isDamaged&quot;: false,
+     &quot;vehicleMake&quot;: &quot;FORD&quot;,
+     &quot;vehicleModel&quot;: &quot;FALCON&quot;,
+     &quot;vehicleType&quot;: &quot;SEDAN&quot;,
+     &quot;vehicleValue&quot;: 1233
+ }
+
+
+Sample Response:
+
+    POST /rates/get-rates
+    {
+    &quot;data&quot;: {
+        &quot;accountNumber&quot;: &quot;PP9900&quot;,
+        &quot;pickupAddress&quot;: {
+            &quot;suburb&quot;: &quot;NORTH SYDNEY&quot;,
+            &quot;state&quot;: &quot;NSW&quot;,
+            &quot;postCode&quot;: &quot;2060&quot;
+        },
+        &quot;deliveryAddress&quot;: {
+            &quot;suburb&quot;: &quot;CAIRNS&quot;,
+            &quot;state&quot;: &quot;QLD&quot;,
+            &quot;postCode&quot;: &quot;4870&quot;
+        },
+        &quot;vehicle&quot;: {
+            &quot;vehicleValue&quot;: 12000,
+            &quot;make&quot;: &quot;FORD&quot;,
+            &quot;model&quot;: &quot;FALCON&quot;,
+            &quot;vehicleType&quot;: &quot;SEDAN&quot;,
+            &quot;isDriveable&quot;: true,
+            &quot;rates&quot;: [
+                {
+                    &quot;serviceType&quot;: &quot;STANDARD&quot;,
+                    &quot;pickupType&quot;: &quot;DEPOT&quot;,
+                    &quot;deliveryType&quot;: &quot;CUSTOMER&quot;,
+                    &quot;transitDays&quot;: 14,
+                    &quot;totalRateIncludingGst&quot;: 1246.63
+                }
+            ]
+        }
+    },
+    &quot;status&quot;: {
+        &quot;code&quot;: 200,
+        &quot;name&quot;: &quot;OK&quot;,
+        &quot;timestamp&quot;: &quot;2021-01-12T09:59:28&quot;
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#request-rates-rates-get-rates-example-curl" data-toggle="tab">Curl</a></li>
+                                    <li role="presentation"><a href="#request-rates-rates-get-rates-example-http" data-toggle="tab">HTTP</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="request-rates-rates-get-rates-example-curl">
+                                        <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+    "accountNumber": "<string>",
+    "deliveryPostcode": "<string>",
+    "deliveryState": "<string>",
+    "deliverySuburb": "<string>",
+    "isDamaged": "<boolean>",
+    "isDriveable": "<boolean>",
+    "isModified": "<boolean>",
+    "pickupPostcode": "<string>",
+    "pickupState": "<string>",
+    "pickupSuburb": "<string>",
+    "vehicleMake": "<string>",
+    "vehicleModel": "<string>",
+    "vehicleType": "<string>",
+    "vehicleValue": "<integer>",
+    "serviceType": "<string>",
+    "pickupType": "<string>",
+    "deliveryType": "<string>"
+}' "{{baseUrl}}/rates/get-rates"</code></pre>
+                                    </div>
+                                    <div class="tab-pane" id="request-rates-rates-get-rates-example-http">
+                                        <pre><code class="hljs http">POST %7B%7BbaseUrl%7D%7D/rates/get-rates HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+    "accountNumber": "<string>",
+    "deliveryPostcode": "<string>",
+    "deliveryState": "<string>",
+    "deliverySuburb": "<string>",
+    "isDamaged": "<boolean>",
+    "isDriveable": "<boolean>",
+    "isModified": "<boolean>",
+    "pickupPostcode": "<string>",
+    "pickupState": "<string>",
+    "pickupSuburb": "<string>",
+    "vehicleMake": "<string>",
+    "vehicleModel": "<string>",
+    "vehicleType": "<string>",
+    "vehicleValue": "<integer>",
+    "serviceType": "<string>",
+    "pickupType": "<string>",
+    "deliveryType": "<string>"
+}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+
+                                    <li role="presentation" class="active">
+                                        <a href="#request-rates-rates-get-rates-responses-de9b3bfd-508b-4d4b-9727-8b30542f53c3" data-toggle="tab">
+
+                                            Request has missing/invalid values
+
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation">
+                                        <a href="#request-rates-rates-get-rates-responses-14b90000-8633-4f6d-a1fb-7c3615d6445b" data-toggle="tab">
+
+                                            Rates retrieved
+
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+
+                                    <div class="tab-pane active" id="request-rates-rates-get-rates-responses-de9b3bfd-508b-4d4b-9727-8b30542f53c3">
+                                        <table class="table table-bordered">
+                                            <tr><th style="width: 20%;">Status</th><td>400 Bad Request</td></tr>
+
+                                            <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+
+
+
+                                            <tr>
+                                                <td class="response-text-sample" colspan="2">
+                                                    <pre><code>{
+    "errors": [
+        {
+            "message": ""
+        },
+        {
+            "message": "mollit esse"
+        }
+    ],
+    "code": -46576316,
+    "name": "voluptate eiusmod",
+    "timeStamp": "1957-12-31T23:24:24.842Z"
+}</code></pre>
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+                                    <div class="tab-pane" id="request-rates-rates-get-rates-responses-14b90000-8633-4f6d-a1fb-7c3615d6445b">
+                                        <table class="table table-bordered">
+                                            <tr><th style="width: 20%;">Status</th><td>200 OK</td></tr>
+
+                                            <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+
+
+
+                                            <tr>
+                                                <td class="response-text-sample" colspan="2">
+                                                    <pre><code>{
+    "accountNumber": "AB1234",
+    "pickupAddress": {
+        "suburb": "sydney",
+        "state": "NSW",
+        "postCode": "2000"
+    },
+    "deliveryAddress": {
+        "suburb": "sydney",
+        "state": "NSW",
+        "postCode": "2000"
+    },
+    "vehicle": {
+        "vehicleValue": 42000,
+        "make": "FORD",
+        "model": "FALCON",
+        "vehicleType": "SEDAN",
+        "isDriveable": true,
+        "rates": [
+            {
+                "serviceType": "EXPRESS",
+                "pickupType": "CUSTOMER",
+                "deliveryType": "DEPOT",
+                "transitDays": 2,
+                "totalRateIncludingGst": 1023.23
+            },
+            {
+                "serviceType": "EXPRESS",
+                "pickupType": "CUSTOMER",
+                "deliveryType": "DEPOT",
+                "transitDays": 2,
+                "totalRateIncludingGst": 1023.23
+            }
+        ]
+    }
+}</code></pre>
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <hr>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="endpoints-group">
+                        <h3 id="folder-auth">
+                            auth
+                            <a href="#folder-auth"><i class="glyphicon glyphicon-link"></i></a>
+                        </h3>
+
+                        <div></div>
+
+
+
+                        <div class="request">
+
+                            <h4 id="request-auth-auth-login">
+                                /auth/login
+                                <a href="#request-auth-auth-login"><i class="glyphicon glyphicon-link"></i></a>
+                            </h4>
+
+                            <div>
+                                <p>Sample request:</p>
+
+<pre><code> POST /login
+ {
+     &quot;username&quot;: &quot;username&quot;,
+     &quot;password&quot;: &quot;YourPassword1!&quot;,
+ }
+</code></pre>
+
+                                <p>Sample response:</p>
+
+<pre><code>{
+    &quot;data&quot;: {
+        &quot;username&quot;: &quot;USERNAME&quot;,
+        &quot;accessToken&quot;: &quot;eyJhbGc.Ppmh4c4ELUpzDJyde8.SXbFSjEqre.l1p1UsR.....&quot;
+    },
+    &quot;status&quot;: {
+        &quot;code&quot;: 200,
+        &quot;name&quot;: &quot;OK&quot;,
+        &quot;timestamp&quot;: &quot;2020-12-30T14:50:27&quot;
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#request-auth-auth-login-example-curl" data-toggle="tab">Curl</a></li>
+                                    <li role="presentation"><a href="#request-auth-auth-login-example-http" data-toggle="tab">HTTP</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="request-auth-auth-login-example-curl">
+                                        <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+    "password": "<string>",
+    "username": "<string>"
+}' "{{baseUrl}}/auth/login"</code></pre>
+                                    </div>
+                                    <div class="tab-pane" id="request-auth-auth-login-example-http">
+                                        <pre><code class="hljs http">POST %7B%7BbaseUrl%7D%7D/auth/login HTTP/1.1
+Host: 
+Content-Type: application/json
+
+{
+    "password": "<string>",
+    "username": "<string>"
+}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+
+                                    <li role="presentation" class="active">
+                                        <a href="#request-auth-auth-login-responses-80c32f64-71ac-4df5-a516-a172222050b4" data-toggle="tab">
+
+                                            Request has missing/invalid values/failed authentication
+
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation">
+                                        <a href="#request-auth-auth-login-responses-614442f4-80cb-4849-84c9-2b719ee10f26" data-toggle="tab">
+
+                                            Auth bearer token
+
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+
+                                    <div class="tab-pane active" id="request-auth-auth-login-responses-80c32f64-71ac-4df5-a516-a172222050b4">
+                                        <table class="table table-bordered">
+                                            <tr><th style="width: 20%;">Status</th><td>400 Bad Request</td></tr>
+
+                                            <tr><th style="width: 20%;">Content-Type</th><td>text/plain</td></tr>
+
+
+                                        </table>
+                                    </div>
+
+                                    <div class="tab-pane" id="request-auth-auth-login-responses-614442f4-80cb-4849-84c9-2b719ee10f26">
+                                        <table class="table table-bordered">
+                                            <tr><th style="width: 20%;">Status</th><td>200 OK</td></tr>
+
+                                            <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+
+
+
+                                            <tr>
+                                                <td class="response-text-sample" colspan="2">
+                                                    <pre><code>{
+    "username": "quis fugiat",
+    "accessToken": "officia adi"
+}</code></pre>
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <hr>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("table:not(.table)").addClass('table table-bordered');
+        });
+    </script>
+</body>
+</html>

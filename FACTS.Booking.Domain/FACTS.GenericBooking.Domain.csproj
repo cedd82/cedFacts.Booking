@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="Dapper.Contrib" />
+    <PackageReference Include="FluentNHibernate" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="NLog" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FACTS.Booking.Common\FACTS.GenericBooking.Common.csproj" />
+    <ProjectReference Include="..\FACTS.Booking.Repository.Ingres\FACTS.GenericBooking.Repository.Ingres.csproj" />
+    <ProjectReference Include="..\FACTS.Booking.Repository.Postgres\FACTS.GenericBooking.Repository.Postgres.csproj" />
+  </ItemGroup>
+
+</Project>
